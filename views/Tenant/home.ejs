@@ -1,0 +1,84 @@
+<%-include ("../Includes/Tenant/head.ejs")%>
+
+    <body>
+        <%-include ("../Includes/Tenant/header.ejs")%>
+
+
+            <main id="main">
+                <div class="container-lg">
+                    <div class="row">
+                        <div class="col-8">
+                            <h3 class="mb-3">Featured Rooms</h3>
+                        </div>
+                        <div class="col-4 text-md-end">
+                            <a class="btn btn-success mb-3 me-1" href="#carouselExample" role="button"
+                                data-bs-slide="prev">
+                                <i class="fa fa-arrow-left"></i>
+                            </a>
+                            <a class="btn btn-success mb-3 " href="#carouselExample" role="button" data-bs-slide="next">
+                                <i class="fa fa-arrow-right"></i>
+                            </a>
+                        </div>
+                        <div class="col-12">
+                            <div id="carouselExample" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    <% for (let i=0; i < rooms.length; i +=3) { %>
+                                        <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
+                                            <div class="row">
+                                                <% for (let j=i; j < i + 3 && j < rooms.length; j++) { %>
+                                                    <div class="col-md-4 mb-3">
+                                                        <div class="card">
+                                                            <img height="250px" width="100%" alt="100%x280"
+                                                                src="/img/thumbnail/<%=rooms[j].cover_url%>">
+                                                            <div class="card-body">
+                                                                <h4 class="card-title">
+                                                                    <%= rooms[j].type %>
+                                                                </h4>
+                                                                <p class="card-text m-0">Room Number: <%=
+                                                                        rooms[j].room_number %>
+                                                                </p>
+                                                                <p class="card-text m-0">Price: <%= rooms[j].price %>
+                                                                </p>
+                                                                <p class="card-text mt-0 mb-2">
+                                                                    <%= rooms[j].description %>
+                                                                </p>
+                                                                <a href="/room/<%=rooms[j].id%>"
+                                                                    class="btn btn-success btn-sm">Details</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <% } %>
+                                            </div>
+                                        </div>
+                                        <% } %>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row align-items-center justify-content-between mt-4">
+                        <div class="col-lg-6">
+                            <h4 class="mb-2 fw-bold">Rules and Regulations</h4>
+                            <p class="text-muted">Below are some example rules and regulations for Magnolia Hall
+                                Dormitory:
+                            </p>
+                            <ol class="list-features lead list-l">
+                                <li>Quiet hours are from 10:00 PM to 7:00 AM.</li>
+                                <li>No smoking is allowed inside the dormitory building.</li>
+                                <li>Guests must sign in at the front desk.</li>
+                                <li>No pets are allowed in the dormitory.</li>
+                                <li>Residents are responsible for their own personal belongings.</li>
+                            </ol>
+                        </div>
+                        <div class="col-lg-6">
+                            <img src="/img/rules.webp" alt="" class="img-fluid mx-auto d-block">
+                        </div>
+
+                    </div>
+                </div>
+            </main>
+            <%-include ("../Includes/Tenant/script.ejs")%>
+
+    </body>
+
+    </html>

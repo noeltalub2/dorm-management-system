@@ -1,0 +1,109 @@
+<%-include ("../Includes/Tenant/head.ejs")%>
+
+    <body>
+        <%-include ("../Includes/Tenant/header.ejs")%>
+
+            <main id="main">
+                <div class="container-lg">
+                    <div class="card">
+                        <h4 class="card-header">
+                            Reservation Info
+                        </h4>
+                        <div class="card-body">
+                            <form action="/modify" method="post" class="needs-validation" novalidate>
+                                <div class="row">
+                                    <h4>Room Number: <%=reservation.room_number%>
+                                    </h4>
+                                    <h5 class="mb-3">Total Price: <%=reservation.total_price%>
+                                    </h5>
+                                    <input type="hidden" name="id" value="<%=reservation.id%>">
+
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-2">
+                                            <label for="check-in-label">Date to
+                                                Check
+                                                In</label>
+                                            <input type="date" class="form-control" required name="check_in_date"
+                                                id="check-in-date" min="<%= new Date().toISOString().split('T')[0] %>"
+                                                value="<%=reservation.check_in_date%>">
+
+                                            <div class="invalid-feedback">
+                                                Please choose a check-in date.
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-2">
+                                            <label for="check-out-label">Date to
+                                                Check
+                                                Out</label>
+                                            <input type="date" class="form-control" required name="check_out_date"
+                                                id="check-out-date" min="<%=reservation.check_out_date%>"
+                                                value="<%=reservation.check_out_date%>" max="<%=reservation.check_out_date%>">
+                                            <div class="invalid-feedback">
+                                                Please choose a check-out date.
+                                            </div>
+                                        </div>
+                                    </div>
+                               
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-2">
+                                            <label for="payment-method-label">Payment
+                                                Method</label>
+                                            <select class="form-control" name="payment_method" required>
+                                                <option value="" disabled selected>
+                                                    Select a
+                                                    payment
+                                                    method</option>
+
+
+                                                <optgroup label="Offline payment">
+                                                    <option value="Cash" <%=reservation.payment_method==='Cash'
+                                                        ? 'selected' : '' %>>Cash
+                                                    </option>
+                                                </optgroup>
+
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Please choose a payment method.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-2">
+                                    <button type="submit" class="btn btn-success">Modify</button>
+                                    <a href="/account" class="btn btn-secondary">Cancel</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+
+                </div>
+            </main>
+            <%-include ("../Includes/Tenant/script.ejs")%>
+                <script>
+                    document.getElementById('check-in-date').addEventListener('input', function () {
+                        var checkInDate = new Date(this.value);
+                        var sixMonthsLater = new Date(checkInDate);
+                        sixMonthsLater.setMonth(checkInDate.getMonth() + 6);
+
+                        // Format the date to match the input format (YYYY-MM-DD)
+                        var formattedDate = sixMonthsLater.toISOString().split('T')[0];
+
+                        // Set the minimum date for check-out date input
+                        document.getElementById('check-out-date').min = formattedDate;
+                        document.getElementById('check-out-date').max = formattedDate;
+
+                        // Set the value of check-out date input
+                        document.getElementById('check-out-date').value = formattedDate;
+                    });
+
+
+
+                </script>
+
+    </body>
+
+    </html>

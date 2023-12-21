@@ -1,0 +1,111 @@
+<%-include ("../Includes/Tenant/head.ejs")%>
+
+    <body>
+        <%-include ("../Includes/Tenant/header.ejs")%>
+
+
+            <main id="main">
+                <div class="container-lg">
+
+
+
+                    <div class="row align-items-center justify-content-between">
+                        <div class="col-12 col-md-6  mt-md-0 mb-3">
+                            <img alt="image" class=" shadow"
+                                src="/img/bg.jpg" height="540" width="100%">
+                        </div>
+                        <div class="col-12 col-md-5">
+                            <h2>Magnolia Residence Hall Club</h2>
+                            <p class="text-h3">At Magnolia Dormitory, we believe in fostering a supportive community that empowers girls to achieve their full potential. Our state-of-the-art facility boasts modern architecture, inviting common areas, and comfortable living spaces to ensure a pleasant and enriching experience for all residents.</p>
+                            <div class="row align-items-center">
+                                <div class="col-10 col-sm-6 mx-auto">
+                                    <div class="my-3">
+                                        <div class=" d-inline mr-2">
+                                            <i class=" p-2  fa fa-wifi"></i>
+                                        </div>
+                                        <h4 class="d-inline small ">Free Wifi</h4>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-10 col-sm-6 mx-auto">
+                                    <div class="my-3">
+                                        <div class=" d-inline mr-2">
+                                            <i class="p-2 fa fa-lock"></i>
+                                        </div>
+                                        <h4 class="d-inline small ">Secured place</h4>
+                                    </div>
+                                </div>
+                                <div class="col-10 col-sm-6 mx-auto">
+                                    <div class="my-3">
+                                        <div class=" d-inline mr-2">
+                                            <i class="p-2 fa fa-bolt"></i>
+                                        </div>
+                                        <h4 class="d-inline small ">Paid Electricity</h4>
+                                    </div>
+                                </div>
+                                <div class="col-10 col-sm-6 mx-auto">
+                                    <div class="my-3">
+                                        <div class=" d-inline mr-2">
+                                            <i class="p-2 fa fa-tint"></i>
+                                        </div>
+                                        <h4 class="d-inline small ">Water provided</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row text-center justify-content-center mt-5">
+                        <div class="col-12 col-md-8 col-lg-7">
+                            <h1>Contact Us</h1>
+                            <p class="text-h3">If you have any questions or need assistance, please feel free to contact
+                                us:
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-12 col-md-6">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d2679.976644492569!2d120.59393289033349!3d18.20719772704602!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sph!4v1700122550078!5m2!1sen!2sph"
+                                width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                        <div class="col-12 col-md-6 pt-5 pt-md-0">
+                            <form method="post" action="/messages" class="needs-validation" novalidate>
+                                <p class="fw-bold fs-5 mb-1">Send us a message</p>
+                                <div class="row">
+                                    <div class="col">
+                                        <input type="text" class="form-control" placeholder="Subject" name="subject" required>
+                                        <div class="invalid-feedback">
+                                            Subject is required
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col">
+                                        <textarea class="form-control border-secondary" name="content" rows="3"
+                                            placeholder="How can we help?"
+                                            style="margin-top: 0px; margin-bottom: 0px; height: 350px;"
+                                            spellcheck="false" required></textarea>
+
+                                        <div class="invalid-feedback">
+                                            Message is required
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+            <%-include ("../Includes/Tenant/script.ejs")%>
+
+    </body>
+
+    </html>

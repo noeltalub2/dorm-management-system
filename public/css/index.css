@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Jost:wght@400;700&display=swap');
+
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f6f6f6;
+    background-image: url("/img/background.svg");
+    background-size: cover;
+    background-repeat: no-repeat no-repeat;
+
+}
+
+
+#main {
+    padding-top: 30px;
+}

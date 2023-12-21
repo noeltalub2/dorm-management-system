@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="shortcut icon" href="/img/mmsu_logo.png" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/020dbcd45c.js" crossorigin="anonymous"></script>
+    <title>Sign Up</title>
+</head>
+
+<body>
+
+    <main id="main">
+        <div class="container-lg">
+            <div class="row justify-content-center">
+                <div class="col-xl-5 col-lg-6 col-md-6 col-sm-7 p-0">
+                    <div class="form-container px-4 py-1 mt-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="mb-0 mt-lg-4 mt-md-4 mt-sm-4">Create an account</h4>
+                                <p class="text-muted">Enter your details</p>
+                                <%-include ("./Includes/message.ejs")%>
+                                    <form method="post" class="needs-validation" novalidate>
+                                        <div class="row">
+                                            <div class="col-6">
+
+                                                <input type="text" class="form-control" placeholder="Firstname"
+                                                    name="firstname" required minlength="2">
+
+                                                <div class="invalid-feedback">
+                                                    Required
+                                                </div>
+
+                                            </div>
+                                            <div class="col-6">
+
+                                                <input type="text" class="form-control" placeholder="Lastname"
+                                                    name="lastname" required minlength="2">
+
+                                                <div class="invalid-feedback">
+                                                    Required
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="mt-3 mb-3">
+
+                                            <select class="form-select" name="gender" id="gender"
+                                                aria-describedby="genderFeedback" required="">
+
+
+
+                                                <option value="" disabled selected hidden>Gender</option>
+                                                <option value="Female">Female</option>
+
+
+
+                                            </select>
+                                            <div id="genderFeedback" class="invalid-feedback">
+                                                Please select your gender.
+                                            </div>
+                                        </div>
+                                        <div class="mt-3 mb-3">
+                                            <input type="email" class="form-control" placeholder="Email" name="email"
+                                                required>
+
+                                            <div class="invalid-feedback">
+                                                Required
+                                            </div>
+                                        </div>
+
+
+                                        <div class="mt-3 mb-3">
+                                            <input type="tel" class="form-control" placeholder="Phonenumber"
+                                                name="phonenumber" required minlength="11" maxlength="11">
+
+                                            <div class="invalid-feedback">
+                                                Required
+                                            </div>
+                                        </div>
+
+
+                                        <div class="mt-3 mb-3">
+                                            <input type="text" class="form-control" placeholder="Username"
+                                                name="username" required>
+
+                                            <div class="invalid-feedback">
+                                                Required
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3">
+
+                                            <input type="password" name="password" class="form-control"
+                                                id="yourPassword" required placeholder="Password" min="6">
+                                            <div class="invalid-feedback">Please enter your password!</div>
+                                        </div>
+                                        <div class="mb-3">
+
+                                            <input type="password" name="confirmPassword" class="form-control"
+                                                id="confirmPassword" required placeholder="Confirm password" min="6">
+                                            <div class="invalid-feedback" id="confirmPasswordInvalid">Please confirm
+                                                your
+                                                password!</div>
+                                        </div>
+                                        <div class="mb-2">
+                                            <div class="form-check">
+                                                <input class="form-check-input" name="terms" type="checkbox" value=""
+                                                    id="acceptTerms" required>
+                                                <label class="form-check-label" for="acceptTerms">I agree and accept the
+                                                    <!-- Button trigger modal -->
+                                                    <a type="button" class="link-success" data-bs-toggle="modal"
+                                                        data-bs-target="#privacyAct">
+                                                        Data Privacy Act of 2012
+                                                    </a>
+
+                                                </label>
+                                            </div>
+                                            <div class="modal fade" id="privacyAct" tabindex="-1"
+                                                aria-labelledby="privacyActLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="privacyActLabel">
+                                                                Data Privacy Act of 2012</h1>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row">
+
+                                                                <small class="text-muted mb-3">By submitting
+                                                                    this form, you agree to
+                                                                    the collection and processing of your
+                                                                    personal data in
+                                                                    accordance with the policies of the Mariano
+                                                                    Marcos State
+                                                                    University. The consent does not preclude
+                                                                    the existence of other
+                                                                    criteria for lawful processing of personal
+                                                                    data and does not
+                                                                    waive any rights under the Data Privacy Act
+                                                                    of 2012 and other
+                                                                    applicable laws.</small>
+
+                                                                <p>I undetake to abide the lawful processing of
+                                                                    personal data as
+                                                                    mandated by the provisions of the Data
+                                                                    Privact Act of 2012, it's
+                                                                    implementing rules and regulations as well
+                                                                    as the policies of
+                                                                    the Mariano Marcos State University (MMSU)
+                                                                    and the Accrediting
+                                                                    Agency of Chartered Colleges and
+                                                                    Universities in the Philippines
+                                                                    (AACCUP) </p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Close</button>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <button type="submit" class="btn btn-success w-100" id="btn-reg">
+                                                Register</button>
+                                        </div>
+                                    </form>
+                            </div>
+                            <div class="card-footer">
+                                Have an account?
+                                <a class="text-decoration-none text-success" href="/">Sign In</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-7 col-lg-6 col-md-6">
+                    <div class="title-row d-none d-md-block">
+                        <h1 class="display-4 text-dark mb-2"><strong>Magnolia Hall Dormitory Reservation
+                                System</strong>
+                        </h1>
+                        <p class="lead text-muted mb-3">Enjoy your stay at our dormitory. Here, you can make
+                            reservations, learn about our rules and regulations, and get in touch with us if you have
+                            any questions.
+                        </p>
+                        <hr class="my-4">
+                        <h5>About Us
+                        </h5>
+                        <p class="">
+                            We are committed to providing a comfortable and safe environment for our residents.
+                        </p>
+                        <h5>
+                            Contact Us
+                        </h5>
+                        <p>
+                            If you have any questions or need assistance, please feel free to contact us:
+                        </p>
+                        <ul>
+                            <li>Email: contact@magnoliahall.com</li>
+                            <li>Phone: +1 (123) 456-7890</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/validator.js"></script>
+
+    <script>
+        const passwordInput = document.querySelector('#yourPassword');
+        const confirmPasswordInput = document.querySelector('#confirmPassword');
+        const passwordError = document.querySelector('#passwordInvalid');
+        const confirmPasswordError = document.querySelector('#confirmPasswordInvalid');
+
+        confirmPasswordInput.addEventListener('input', (event) => {
+            const confirmPassword = event.target.value;
+            const password = passwordInput.value;
+
+            console.log(confirmPassword)
+            console.log(password)
+
+            if (confirmPassword !== password) {
+                confirmPasswordInput.setCustomValidity('Passwords do not match');
+                confirmPasswordError.innerText = 'Passwords do not match';
+                confirmPasswordError.classList.add('d-block');
+                confirmPasswordInput.classList.add('is-invalid');
+            } else {
+                confirmPasswordInput.setCustomValidity('');
+                confirmPasswordError.innerText = 'Please confirm your password.';
+                confirmPasswordError.classList.remove('d-block');
+                confirmPasswordInput.classList.remove('is-invalid');
+            }
+        });
+    </script>
+</body>
+
+</html>

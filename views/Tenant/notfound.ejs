@@ -1,0 +1,64 @@
+<%-include ("../Includes/Tenant/head.ejs")%>
+
+    <body>
+        <%-include ("../Includes/Tenant/header.ejs")%>
+
+
+            <main id="main">
+                <div class="container-lg">
+                    <div class="mb-3">
+                        <form method="get" class="row gx-2 align-items-end">
+                            <div class="col-lg-3 col-6">
+                                <label for="sort" class="form-label mb-0"><i class="fas fa-sort me-2"></i>Sort
+                                    by:</label>
+                                <select class="form-select" id="sort" name="sortField">
+                                    <option value="room_number" <%=sortField==='room_number' ? 'selected' : '' %>><i
+                                            class="fas fa-sort-numeric-up me-2"></i>Room Number</option>
+                                    <option value="room_floor" <%=sortField==='room_floor' ? 'selected' : '' %>><i
+                                            class="fas fa-layer-group me-2"></i>Room Floor</option>
+                                    <option value="type" <%=sortField==='type' ? 'selected' : '' %>><i
+                                            class="fas fa-bed me-2"></i>Type</option>
+                                    <option value="capacity" <%=sortField==='capacity' ? 'selected' : '' %>><i
+                                            class="fas fa-users me-2"></i>Capacity</option>
+                                    <option value="price" <%=sortField==='price' ? 'selected' : '' %>><i
+                                            class="fas fa-dollar-sign me-2"></i>Price</option>
+
+                                </select>
+                            </div>
+                            <div class="col-lg-3 col-6">
+                                <label for="sortOrder" class="form-label mb-0"><i
+                                        class="fas fa-sort-amount-up me-2"></i>Sort order:</label>
+                                <select class="form-select" id="sortOrder" name="sortOrder">
+                                    <option value="asc" <%=sortOrder==='asc' ? 'selected' : '' %>><i
+                                            class="fas fa-sort-alpha-up me-2"></i>Ascending</option>
+                                    <option value="desc" <%=sortOrder==='desc' ? 'selected' : '' %>><i
+                                            class="fas fa-sort-alpha-down me-2"></i>Descending</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-2 col-12">
+                                <div class="form-check mt-2">
+                                    <input class="form-check-input" type="checkbox" id="availableOnly"
+                                        name="availableOnly" <%=availableOnly ? 'checked' : '' %>>
+                                    <label class="form-check-label" for="availableOnly">Available Only</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-12">
+                                <button type="submit" class="btn btn-success mt-2"><i
+                                        class="fas fa-filter me-2"></i>Filter</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="text-center mt-5">
+                            <h2>No room has found</h2>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+            <%-include ("../Includes/Tenant/script.ejs")%>
+
+    </body>
+
+    </html>

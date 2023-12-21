@@ -1,0 +1,218 @@
+<%-include ("../Includes/Admin/admin_head.ejs")%>
+    <%-include ("../Includes/Admin/admin_header.ejs")%>
+
+        <div class="app-wrapper">
+
+            <div class="app-content pt-3 p-md-3 p-lg-4">
+                <div class="container-lg">
+
+
+                    <div class="row g-4 mb-4">
+                        <div class="col-12">
+                            <div class="app-card shadow-sm">
+                                <div class="app-card-body p-3 p-lg-4 mb-2">
+                                    <h1 class="app-page-title mb-2">Update Rooms</h1>
+                                    <p class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                            <path
+                                                d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                            <path
+                                                d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                                        </svg> Update name, price, and description for the room (e.g. Single room,
+                                        Double room, Studio). Below you can upload photos for your room.</p>
+                                </div>
+
+                            </div>
+
+                            <div class="app-card shadow-sm">
+                                <div class="app-card-body p-3 p-lg-4">
+                                    <form action="/admin/reservation/update" method="post" class="needs-validation"
+                                        novalidate>
+                                        <div class="row">
+                                            <h4>Details</h4>
+
+                                            <div class="col-md-4">
+                                                <div class="form-group mb-2">
+                                                    <label for="check-in-label" class="fw-bold">Reservation ID
+                                                    </label>
+                                                    <input type="text" name="id" class="form-control"
+                                                        value="<%=reservation.id%>" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group mb-2">
+                                                    <label for="check-in-label" class="fw-bold">Date to
+                                                        Check
+                                                        In</label>
+                                                    <input type="date" class="form-control" required
+                                                        name="check_in_date" id="check-in-date"
+                                                    
+                                                        value="<%=reservation.check_in_date%>">
+
+                                                    <div class="invalid-feedback">
+                                                        Please choose a check-in date.
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <div class="form-group mb-2">
+                                                    <label for="check-out-label" class="fw-bold">Date to
+                                                        Check
+                                                        Out</label>
+                                                    <input type="date" class="form-control" required
+                                                        name="check_out_date" id="check-out-date"
+                                                  
+                                                        value="<%=reservation.check_out_date%>"
+                                                       >
+                                                    <div class="invalid-feedback">
+                                                        Please choose a check-out date.
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <div class="form-group mb-2">
+
+                                                    <label for="status" class="fw-bold">Status</label>
+                                                    <select class="form-select" id="status" name="status" required>
+                                                        <option value="Completed" <%=reservation.status==='Completed'
+                                                        ? 'selected' : '' %>>Completed</option>
+                                                        <option value="Confirmed" <%=reservation.status==='Confirmed'
+                                                            ? 'selected' : '' %>>Confirmed</option>
+                                                        <option value="Pending" <%=reservation.status==='Pending'
+                                                            ? 'selected' : '' %>>Pending</option>
+
+                                                        <option value="Cancelled" <%=reservation.status==='Cancelled'
+                                                            ? 'selected' : '' %>>Cancelled</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group mb-2">
+                                                    <label for="payment-method-label" class="fw-bold">Payment
+                                                        Method</label>
+                                                    <select class="form-control" name="payment_method" required>
+                                                        <option value="" disabled selected>
+                                                            Select a
+                                                            payment
+                                                            method</option>
+
+
+
+                                                        <optgroup label="Offline payment">
+                                                            <option value="Cash" <%=reservation.payment_method==='Cash'
+                                                                ? 'selected' : '' %>>Cash
+                                                            </option>
+                                                        </optgroup>
+
+                                                    </select>
+                                                    <div class="invalid-feedback">
+                                                        Please choose a payment method.
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="row">
+                                            <h4>Payment</h4>
+
+                                            <div class="col-md-4">
+                                                <div class="form-group mb-2">
+                                                    <label for="is_paid" class="fw-bold">Payment Status</label>
+                                                    <select class="form-select" id="is_paid" name="is_paid" required
+                                                        onchange="toggleReferenceInput()">
+                                                        <option value="1" <%=reservation.is_paid=='1' ? 'selected' : ''
+                                                            %>>Paid</option>
+                                                        <option value="0" <%=reservation.is_paid=='0' ? 'selected' : ''
+                                                            %>>Unpaid</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group mb-2">
+                                                    <label for="check-in-label" class="fw-bold">Reference</label>
+                                                    <input type="text" name="ref_num" class="form-control" required
+                                                        value="<%=reservation.ref_num%>" id="ref_num_input">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <h4>Rooms</h4>
+                                            <input type="hidden" value="<%=rooms[0].id%>" name="room_id">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <th>Room Number</th>
+                                                    <th>Room Type</th>
+                                                    <th>Floor</th>
+                                              
+                                                    <th>Price</th>
+                                                </thead>
+                                                <tbody>
+                                                    <% rooms.forEach((room)=> { %>
+                                                        <tr>
+                                                            <td>
+                                                                <%= room.room_number %>
+                                                            </td>
+                                                            <td>
+                                                                <%= room.type %>
+                                                            </td>
+                                                            <td>
+                                                                <%= room.room_floor %>
+                                                            </td>
+                                                         
+                                                            <td>P<%= reservation.total_price %>
+                                                            </td>
+                                                        </tr>
+                                                        <% }); %>
+                                                </tbody>
+                                            </table>
+
+
+                                        </div>
+                                        <div class="mt-2">
+                                            <button type="submit" class="btn btn-success">Save</button>
+                                            <a href="/admin/reservations" class="btn btn-secondary">Cancel</a>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!--//app-card-->
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+        <!--//container-fluid-->
+        
+
+        <!--//app-content-->
+        <%-include ("../Includes/Admin/admin_end.ejs")%>
+            <script>
+                function toggleReferenceInput() {
+                    var isPaidSelect = document.getElementById("is_paid");
+                    var referenceInput = document.getElementById("ref_num_input");
+
+                    if (isPaidSelect.value === "0") { // Unpaid
+                        referenceInput.disabled = true;
+                        ; // Optionally clear the input value
+                    } else {
+                        referenceInput.disabled = false;
+                    }
+                }
+
+                // Call the function on page load to set the initial state
+                toggleReferenceInput();
+            </script>
+            </body>
+
+            </html>

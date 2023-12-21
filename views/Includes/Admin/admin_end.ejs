@@ -1,0 +1,46 @@
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/vendor/bootstrap/js/validator.js"></script>
+
+<script src="/vendor/bootstrap/js/app.js"></script>
+
+<script src="/vendor/sweetalert/sweetalert.js"></script>
+<script src="/vendor/datatables/jquery.js"></script>
+
+<script src="/vendor/datatables/jquery_datatables.js"></script>
+<script src="/vendor/datatables/bootstrap5_datatables.js"></script>
+<script src="/vendor/datatables/buttons_datatables.js"></script>
+
+
+
+<script src="/vendor/datatables/jszip_datatables.js"></script>
+<script src="/vendor/datatables/pdfmake_datatables.js"></script>
+<script src="/vendor/datatables/vfs_fonts_datatables.js"></script>
+<script src="/vendor/datatables/buttons_html5_datatables.js"></script>z
+
+
+
+<script>
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 4000,
+        timerProgressBar: true,
+    })
+
+    if ('<%-success_msg%>' != '') {
+
+        Toast.fire({
+            icon: 'success',
+            title: "<%=success_msg%>"
+        })
+    }
+
+    if ('<%-error_msg%>' != '') {
+
+        Toast.fire({
+            icon: 'error',
+            title: "<%=error_msg%>"
+        })
+    }
+</script>

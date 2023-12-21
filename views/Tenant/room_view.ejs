@@ -1,0 +1,212 @@
+<%-include ("../Includes/Tenant/head.ejs")%>
+
+    <body>
+        <%-include ("../Includes/Tenant/header.ejs")%>
+
+
+            <main id="main">
+                <div class="container-lg">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <h5 class="card-title">
+                                Room <%= room.room_number %> - Floor <%= room.room_floor %>
+                            </h5>
+                            <p class="display-1">
+                                <%= room.status %>
+                            </p>
+                            <!-- Room Number, Floor, and Type -->
+                            <div class="row g-2">
+
+                                <div class="col-lg-4">
+                                    <div class="card text-bg-success">
+                                        <div class="card-body">
+                                            Type: <p class="m-0 fw-bold">
+                                                <%= room.type %>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="card text-bg-success">
+                                        <div class="card-body">
+                                            Price: <p class="m-0 fw-bold">
+                                                P<%= room.price %>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="card text-bg-success">
+                                        <div class="card-body">
+                                            Capacity: <p class="m-0 fw-bold">
+
+                                                <%= room.capacity %>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr class="my-4">
+                            <!-- Room Description -->
+                            <p class="card-text mt-2">
+                                <%= room.description %>
+                            </p>
+
+
+                            <%if(room.status==='Available' ) {%>
+
+                                <button type="button" class="btn btn-outline-success btn-sm mb-4" data-bs-toggle="modal"
+                                    data-bs-target="#staticBackdrop">
+                                    Reserve
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+                                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <form method="post" action="/room" novalidate class="needs-validation">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Reservation
+                                                        Info
+                                                    </h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+
+                                                    <div class="row">
+                                                        <p class="fw-bold mb-0">Please Note: This is a 6 months contract</p>
+                                                        <p class="">Available Slot: <%=room.capacity%></p>
+                                                        <input type="hidden" name="room_id" value="<%=room.id%>">
+                                                        <input type="hidden" name="total_price"
+                                                            value="<%= room.price %>">
+
+                                                        <div class="col-md-6">
+                                                            <div class="form-group mb-2">
+                                                                <label for="check-in-label">Date to Check In</label>
+                                                                <input type="date" class="form-control" required
+                                                                    name="check_in_date" id="check-in-date"
+                                                                    min="<%= new Date().toISOString().split('T')[0] %>">
+                                                                <div class="invalid-feedback">
+                                                                    Please choose a check-in date.
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <div class="form-group mb-2">
+                                                                <label for="check-out-label">Date to Check Out</label>
+                                                                <input type="date" class="form-control" required
+                                                                    name="check_out_date" id="check-out-date"
+                                                                    min="<%= new Date().toISOString().split('T')[0] %>"
+                                                                    max="" readonly>
+                                                                <div class="invalid-feedback">
+                                                                    Please choose a check-out date.
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                       
+
+
+                                                        <div class="form-group mb-2">
+                                                            <label for="payment-method-label fw-bold">Payment
+                                                                Method</label>
+                                                            <select class="form-control" name="payment_method" required>
+                                                                <option value="" disabled selected>
+                                                                    Select a
+                                                                    payment
+                                                                    method</option>
+
+
+                                                            
+
+                                                                <optgroup label="Offline payment">
+                                                                    <option value="Cash">Cash
+                                                                    </option>
+                                                                </optgroup>
+
+                                                            </select>
+                                                            <div class="invalid-feedback">
+                                                                Please choose a payment method.
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Confirm</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <%} else {%>
+                                    <button type="button" class="btn btn-danger btn-sm">Not Available</button>
+                                    <%}%>
+
+                        </div>
+                        <div class="col-lg-8 ">
+                            <div class="f-carousel" id="myCarousel">
+                                <div class="f-carousel__slide">
+                                    <img data-lazy-src="/img/thumbnail/<%= room.cover_url %>" alt="" class=""
+                                        height="440" width="600">
+                                </div>
+                                <% for (let i=0; i < images.length; i++) { %>
+
+                                    <div class="f-carousel__slide">
+                                        <img width="600" height="440"
+                                            data-lazy-src="/img/rooms/<%=images[i].image_url%>" />
+                                    </div>
+
+                                    <% } %>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </main>
+            <%-include ("../Includes/Tenant/script.ejs")%>
+                <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/carousel/carousel.umd.js"></script>
+                <script
+                    src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/carousel/carousel.thumbs.umd.js"></script>
+                <script>
+
+
+
+                    const container = document.getElementById("myCarousel");
+                    const options = {
+                        Dots: false,
+                        Thumbs: {
+                            type: "classic",
+                        },
+                    };
+
+                    new Carousel(container, options, { Thumbs });
+                    document.getElementById('check-in-date').addEventListener('input', function () {
+                        var checkInDate = new Date(this.value);
+                        var sixMonthsLater = new Date(checkInDate);
+                        sixMonthsLater.setMonth(checkInDate.getMonth() + 6);
+
+                        // Format the date to match the input format (YYYY-MM-DD)
+                        var formattedDate = sixMonthsLater.toISOString().split('T')[0];
+
+                        // Set the minimum date for check-out date input
+                        document.getElementById('check-out-date').min = formattedDate;
+                        document.getElementById('check-out-date').max = formattedDate;
+
+                        // Set the value of check-out date input
+                        document.getElementById('check-out-date').value = formattedDate;
+                    });
+                </script>
+
+    </body>
+
+    </html>

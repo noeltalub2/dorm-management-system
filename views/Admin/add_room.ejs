@@ -1,0 +1,130 @@
+<%-include ("../Includes/Admin/admin_head.ejs")%>
+    <%-include ("../Includes/Admin/admin_header.ejs")%>
+
+        <div class="app-wrapper">
+
+            <div class="app-content pt-3 p-md-3 p-lg-4">
+                <div class="container-lg">
+
+
+                    <div class="row g-4 mb-4">
+                        <div class="col-12">
+                            <div class="app-card shadow-sm">
+                                <div class="app-card-body p-3 p-lg-4 mb-2">
+                                    <h1 class="app-page-title mb-2">Add a Room</h1>
+                                    <p class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                            <path
+                                                d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                            <path
+                                                d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                                        </svg> Enter name and description for the room (e.g. Single room, Double room,
+                                        Studio). You can also specify number of adults and children the room can
+                                        accommodate plus the number of available rooms from this room type. Once you add
+                                        the room you will be able to upload photos.</p>
+                                </div>
+
+                            </div>
+                            <div class="app-card shadow-sm">
+                                <div class="app-card-body p-3 p-lg-4">
+                                    <form action="/admin/room/add" method="post" class="needs-validation" novalidate>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="row">
+
+
+                                                    <div class="col-6 mb-3">
+                                                        <label for="roomNumber" class="fw-bold">Room Number</label>
+                                                        <input type="number" class="form-control" id="roomNumber"
+                                                            name="room_number" required>
+                                                    </div>
+
+                                                    <!-- Room Floor -->
+                                                    <div class="col-6 mb-3">
+                                                        <label for="roomFloor" class="fw-bold">Room Floor</label>
+                                                        <input type="number" class="form-control" id="roomFloor"
+                                                            name="room_floor" required>
+                                                    </div>
+
+                                                    <!-- Room Type -->
+                                                    <div class="col-6 mb-3">
+                                                        <label for="roomType" class="fw-bold">Room Type</label>
+                                                        <select class="form-control" id="roomType" name="type" required>
+                                                            <option value="" disabled selected hidden>Select Room Type</option>
+                                                            <option value="Ordinary">Ordinary</option>
+                                                            <option value="International">International</option>
+                                                        </select>
+                                                    </div>
+                                                    
+
+                                                    <!-- Room Capacity -->
+                                                    <div class="col-6 mb-3">
+                                                        <label for="capacity-label" class="fw-bold">Capacity</label>
+                                                        <select class="form-control" required name="capacity">
+                                                            <option value="" disabled selected>Select number of capacity</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                            <option value="7">7</option>
+                                                            <option value="8">8</option>
+                                                            <option value="9">9</option>
+                                                            <option value="10">10</option>
+                                                            <option value="11">11</option>
+                                                            <option value="12">12</option>
+                                                            <option value="13">13</option>
+                                                            <option value="14">14</option>
+                                                            <option value="15">15</option>
+                                                        </select>
+                                                    </div>
+                                                    
+
+                                                    <!-- Room Price -->
+                                                    <div class=" mb-3">
+                                                        <label for="roomPrice" class="fw-bold">Price</label>
+                                                        <input type="text" class="form-control" id="roomPrice"
+                                                            name="price" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-6">
+                                                <div class=" mb-3">
+                                                    <label for="roomDescription" class="fw-bold">Description</label>
+                                                    <textarea class="form-control" id="roomDescription"
+                                                        name="description" style="height: 200px;" required></textarea>
+                                                </div>
+                                            </div>
+                                            <!-- Room Description -->
+
+                                            <div class="col-12">
+                                                <button type="submit" class="btn btn-primary">Add Room</button>
+                                                <a href="/admin/rooms" class="btn btn-secondary">Cancel</a>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!--//app-card-->
+                    </div>
+
+
+                </div>
+
+
+
+            </div>
+            <!--//container-fluid-->
+        </div>
+        </div>
+
+        <!--//app-content-->
+        <%-include ("../Includes/Admin/admin_end.ejs")%>
+
+            </body>
+
+            </html>

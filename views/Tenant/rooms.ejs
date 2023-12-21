@@ -1,0 +1,158 @@
+<%-include ("../Includes/Tenant/head.ejs")%>
+
+    <body>
+        <%-include ("../Includes/Tenant/header.ejs")%>
+
+
+            <main id="main">
+                <div class="container-lg">
+                    <div class="mb-3">
+                        <form method="get" class="row gx-2 align-items-end">
+                            <div class="col-lg-3 col-6">
+                                <label for="sort" class="form-label mb-0"><i class="fas fa-sort me-2"></i>Sort
+                                    by:</label>
+                                <select class="form-select" id="sort" name="sortField">
+                                    <option value="room_number" <%=sortField==='room_number' ? 'selected' : '' %>><i
+                                            class="fas fa-sort-numeric-up me-2"></i>Room Number</option>
+                                    <option value="room_floor" <%=sortField==='room_floor' ? 'selected' : '' %>><i
+                                            class="fas fa-layer-group me-2"></i>Room Floor</option>
+                                    <option value="type" <%=sortField==='type' ? 'selected' : '' %>><i
+                                            class="fas fa-bed me-2"></i>Type</option>
+                                    <option value="capacity" <%=sortField==='capacity' ? 'selected' : '' %>><i
+                                            class="fas fa-users me-2"></i>Capacity</option>
+                                    <option value="price" <%=sortField==='price' ? 'selected' : '' %>><i
+                                            class="fas fa-dollar-sign me-2"></i>Price</option>
+
+                                </select>
+                            </div>
+                            <div class="col-lg-3 col-6">
+                                <label for="sortOrder" class="form-label mb-0"><i
+                                        class="fas fa-sort-amount-up me-2"></i>Sort order:</label>
+                                <select class="form-select" id="sortOrder" name="sortOrder">
+                                    <option value="asc" <%=sortOrder==='asc' ? 'selected' : '' %>><i
+                                            class="fas fa-sort-alpha-up me-2"></i>Ascending</option>
+                                    <option value="desc" <%=sortOrder==='desc' ? 'selected' : '' %>><i
+                                            class="fas fa-sort-alpha-down me-2"></i>Descending</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-2 col-12">
+                                <div class="form-check mt-2">
+                                    <input class="form-check-input" type="checkbox" id="availableOnly"
+                                        name="availableOnly" <%=availableOnly ? 'checked' : '' %>>
+                                    <label class="form-check-label" for="availableOnly">Available Only</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-12">
+                                <button type="submit" class="btn btn-success mt-2"><i
+                                        class="fas fa-filter me-2"></i>Filter</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="row g-3">
+                        <% rooms.forEach(room=> { %>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="card mb-3 h-100">
+                                    <!-- Adjust the href and image source accordingly based on your routes and file paths -->
+                                    <a href="/room/<%= room.id %>">
+                                        <img src="/img/thumbnail/<%= room.cover_url %>" class="card-img-top"
+                                            height="180px" width="290px" style="object-fit: cover;">
+                                    </a>
+                                    <div class="card-body">
+                                        <h5 class="card-title mb-0">
+
+                                            <%= room.type %> Room <%= room.room_number %>
+
+                                        </h5>
+                                        <p class="card-text mb-0">
+                                            <span class="d-inline-block text-truncate" style="max-width: 100%;">
+                                                <%= room.description %>
+                                            </span>
+                                        </p>
+                                        <div class="status">
+                                            <span class="text-muted">Status: </span>
+                                            <%if (room.status==='Available' ) {%>
+                                                <span class="badge bg-success">
+                                                    <%= room.status %>
+                                                </span>
+                                                <%} else if (room.status==='Not Available' ) {%>
+                                                    <span class="badge bg-danger">
+                                                        <%= room.status %>
+                                                    </span>
+                                                    <%}else if (room.status==='Occupied' ) {%>
+                                                        <span class="badge bg-info">
+                                                            <%= room.status %>
+                                                        </span>
+                                                        <%}%>
+
+                                        </div>
+                                        <div class="capacity">
+                                            <span class="text-muted">
+                                                Capacity: <%= room.capacity %> bed(s)
+                                            </span>
+                                        </div>
+                                        <div class="price mb-2 ">
+                                            <span class="text-muted">
+                                                Price: P<%= room.price %>
+                                            </span>
+                                        </div>
+                                        <a href="/room/<%=room.id%>"
+                                            class="btn btn-outline-secondary btn-sm">Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <% }); %>
+                    </div>
+
+                    <% if (rooms.length> 0) { %>
+                        <!-- render the pagination links here -->
+                        <nav aria-label="Pagination">
+                            <ul class="pagination justify-content-end mt-3">
+                                <% if (prevPageUrl) { %>
+                                    <li class="page-item">
+                                        <a class="page-link" href="<%= prevPageUrl %>">Previous</a>
+                                    </li>
+                                    <% } else { %>
+                                        <li class="page-item disabled">
+                                            <a class="page-link" href="#">Previous</a>
+                                        </li>
+                                        <% } %>
+
+                                            <% for (let i=1; i <=totalPages; i++) { %>
+                                                <% if (i===currentPage) { %>
+                                                    <li class="page-item active" aria-current="page">
+                                                        <a class="page-link" href="#">
+                                                            <%= i %><span class="visually-hidden">(current)</span>
+                                                        </a>
+                                                    </li>
+                                                    <% } else { %>
+                                                        <li class="page-item">
+                                                            <a class="page-link"
+                                                                href="/rooms?page=<%= i %>&sortField=<%= sortField %>&sortOrder=<%= sortOrder %>">
+                                                                <%= i %>
+                                                            </a>
+                                                        </li>
+                                                        <% } %>
+                                                            <% } %>
+
+                                                                <% if (nextPageUrl) { %>
+                                                                    <li class="page-item">
+                                                                        <a class="page-link"
+                                                                            href="<%= nextPageUrl %>">Next</a>
+                                                                    </li>
+                                                                    <% } else { %>
+                                                                        <li class="page-item disabled">
+                                                                            <a class="page-link" href="#">Next</a>
+                                                                        </li>
+                                                                        <% } %>
+                            </ul>
+                        </nav>
+                        <% } %>
+
+                </div>
+            </main>
+            <%-include ("../Includes/Tenant/script.ejs")%>
+
+    </body>
+
+    </html>

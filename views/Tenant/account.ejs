@@ -1,0 +1,309 @@
+<%-include ("../Includes/Tenant/head.ejs")%>
+
+    <body>
+        <%-include ("../Includes/Tenant/header.ejs")%>
+
+            <main id="main">
+                <div class="container-lg">
+                    <div class="profile">
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <div class="card h-100">
+                                    <div class="card-header">
+                                        <h5 class="card-title">Profile Details</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <dl class="row">
+                                            <dt class="col-sm-4">Username:</dt>
+                                            <dd class="col-sm-8">
+                                                <%= profile.username %>
+                                            </dd>
+                                            <dt class="col-sm-4">First Name:</dt>
+                                            <dd class="col-sm-8">
+                                                <%= profile.firstname %>
+                                            </dd>
+
+                                            <dt class="col-sm-4">Last Name:</dt>
+                                            <dd class="col-sm-8">
+                                                <%= profile.lastname %>
+                                            </dd>
+
+                                            <dt class="col-sm-4">Gender:</dt>
+                                            <dd class="col-sm-8">
+                                                <%= profile.gender %>
+                                            </dd>
+
+                                            <dt class="col-sm-4">Email:</dt>
+                                            <dd class="col-sm-8">
+                                                <%= profile.email %>
+                                            </dd>
+
+                                            <dt class="col-sm-4">Phone Number:</dt>
+                                            <dd class="col-sm-8">
+                                                <%= profile.phonenumber %>
+                                            </dd>
+
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="card  h-100">
+                                    <div class="card-header">
+                                        <h5 class="card-title">Messages</h5>
+                                    </div>
+                                    <div class="card-body">
+
+                                        <% messages.forEach((item, index)=> { %>
+
+
+                                            <p class="small mb-0 fw-bold">
+                                                Subject: <span class="fw-normal">
+                                                    <%=item.subject%>
+                                                </span>
+                                            </p>
+
+                                            <p class="small mb-0 fw-bold">
+                                                Date: <span class="fw-normal">
+                                                    <%= new Date(item.date_created).toLocaleDateString() %>
+                                                </span>
+                                            </p>
+
+
+                                            <p class="small mb-0 fw-bold">
+                                                Content: <span class="fw-normal">
+                                                    <%= item.content %>
+                                                </span>
+                                            </p>
+                                            <div class="mb-2"></div>
+
+                                           
+
+                                                <% }); %>
+                                    </div>
+                                </div>
+
+                                </ol>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="table-container mt-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2>Current Reservation</h2>
+                                <div class="table-responsive-md">
+                                    <table class="table" id="booking">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Room</th>
+                                                <th scope="col">Check-in Date</th>
+                                                <th scope="col">Check-out Date</th>
+                                                <th scope="col">Total Price</th>
+
+                                                <th scope="col">Status</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <%getPending.forEach((reservation,index)=> {%>
+                                                <tr>
+                                                    <th scope="row">
+                                                        <%=index + 1%>
+                                                    </th>
+                                                    <td>
+                                                        <%=reservation.room_number%>
+                                                    </td>
+                                                    <td>
+                                                        <%=reservation.check_in_date%>
+                                                    </td>
+                                                    <td>
+                                                        <%=reservation.check_out_date%>
+                                                    </td>
+                                                    <td>
+                                                        P<%=reservation.total_price%>
+                                                    </td>
+                                                    <td>
+
+                                                        <% if (reservation.status==='Pending' ) {%>
+                                                            <span class="badge bg-warning">
+                                                                <%=reservation.status%>
+                                                            </span>
+
+                                                            <%} else {%>
+                                                                <span class="badge bg-success">
+                                                                    <%=reservation.status%>
+                                                                </span>
+                                                                <%}%>
+
+                                                    </td>
+
+                                                    <td>
+                                                        <% if (reservation.status==='Pending' ) {%>
+
+                                                            <button type="button"
+                                                                class="btn btn-secondary btn-sm dropdown-toggle"
+                                                                data-bs-toggle="dropdown" aria-haspopup="true"
+                                                                aria-expanded="false">
+                                                                Action
+                                                            </button>
+                                                            <ul class="dropdown-menu">
+                                                                <li><a class="dropdown-item"
+                                                                        href="/reservation/<%=reservation.id%>">Modify</a>
+                                                                </li>
+                                                                <li><button class="dropdown-item"
+                                                                        onclick="deleteReservation('<%=reservation.id%>','<%=reservation.room_number%>')">Cancel</button>
+                                                                </li>
+
+                                                            </ul>
+
+
+                                                            <%} else {%>
+
+                                                                <a href="/download/<%=reservation.id%>"
+                                                                    class="btn btn-secondary btn-sm">Download</a>
+
+                                                                <%}%>
+
+
+                                                    </td>
+                                                </tr>
+                                                <%})%>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-container mt-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2>Reservation History</h2>
+                                <div class="table-responsive-md">
+                                    <table class="table" id="reservation">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Room</th>
+                                                <th scope="col">Check-in Date</th>
+                                                <th scope="col">Check-out Date</th>
+                                                <th scope="col">Total Price</th>
+                                              
+                                                <th scope="col">Payment Method</th>
+                                                <th scope="col">Status</th>
+                                                <th scope="col">Reciept</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <%recentReservation.forEach((reservation,index)=> {%>
+                                                <tr>
+                                                    <th scope="row">
+                                                        <%=index + 1%>
+                                                    </th>
+                                                    <td>
+                                                        <%=reservation.room_number%>
+                                                    </td>
+                                                    <td>
+                                                        <%=reservation.check_in_date%>
+                                                    </td>
+                                                    <td>
+                                                        <%=reservation.check_out_date%>
+                                                    </td>
+                                                    <td>
+                                                        P<%=reservation.total_price%>
+                                                    </td>
+                                               
+                                                    <td>
+                                                        <%=reservation.payment_method%>
+                                                    </td>
+                                                    <td>
+
+                                                        <% if (reservation.status==='Cancelled' ) {%>
+                                                            <span class="badge bg-danger">
+                                                                <%=reservation.status%>
+                                                            </span>
+
+                                                            <%} else if (reservation.status==='Completed' ) {%>
+                                                                <span class="badge bg-success">
+                                                                    <%=reservation.status%>
+                                                                </span>
+                                                                <%}%>
+
+                                                    </td>
+                                                    <td>
+                                                        <% if (reservation.status==='Cancelled' ) {%>
+
+
+                                                            <%} else if (reservation.status==='Completed' ) {%>
+
+                                                                <a href="/download/<%=reservation.id%>"
+                                                                    class="btn btn-secondary btn-sm">Download</a>
+                                                                <%}%>
+
+
+                                                    </td>
+
+                                                </tr>
+                                                <%})%>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <%-include ("../Includes/Tenant/script.ejs")%>
+                <script>
+                    $(document).ready(function () {
+                        $('#booking').DataTable({});
+                    });
+                    $(document).ready(function () {
+                        $('#reservation').DataTable({
+                            "lengthMenu": [5], // Set the options for the number of rows per page
+                            "pageLength": 5
+                        });
+                    });
+
+
+
+                    function deleteReservation(id, room_number) {
+                        Swal.fire({
+                            title: `Cancel reservation room ${room_number}?`,
+                            text: "You won't be able to revert this!",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, cancel it!'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                fetch("/cancel", {
+                                    method: "POST",
+                                    body: JSON.stringify({ data: id }),
+                                    headers: { "Content-Type": "application/json" },
+                                })
+                                    .then((res) => res.json())
+                                    .then((response) => {
+                                        if (response.status === "success") {
+                                            Swal.fire(
+                                                'Cancelled!',
+                                                'Reservation has been cancelled.',
+                                                'success'
+                                            ).then(function () {
+                                                window.location.href = '/account'
+                                            })
+                                        }
+                                    })
+                            }
+                        })
+                    }
+
+                </script>
+
+    </body>
+
+    </html>

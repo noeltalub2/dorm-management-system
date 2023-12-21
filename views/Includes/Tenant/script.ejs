@@ -1,0 +1,37 @@
+<!-- Vendor JS Files -->
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/vendor/sweetalert/sweetalert.js"></script>
+<script src="https://kit.fontawesome.com/020dbcd45c.js" crossorigin="anonymous"></script>
+
+<script src="/vendor/datatables/jquery.js"></script>
+<script src="/vendor/datatables/jquery_datatables.js"></script>
+<script src="/vendor/datatables/bootstrap5_datatables.js"></script>
+<script src="/vendor/datatables/buttons_datatables.js"></script>
+
+<script src="/js/validator.js"></script>
+
+<script>
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 4000,
+        timerProgressBar: true,
+    })
+
+    if ('<%-success_msg%>' != '') {
+
+        Toast.fire({
+            icon: 'success',
+            title: "<%=success_msg%>"
+        })
+    }
+
+    if ('<%-error_msg%>' != '') {
+
+        Toast.fire({
+            icon: 'error',
+            title: "<%=error_msg%>"
+        })
+    }
+</script>
